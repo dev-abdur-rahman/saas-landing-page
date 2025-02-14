@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@layer components {
+    .btn {
+        @apply bg-black text-white py-2 px-4 rounded-lg inline-flex justify-center tracking-tight;
+    }
+    .btn-hover {
+        @apply flex items-center gap-1 font-bold bg-transparent;
+    }
+    .absolute-center {
+        @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+    }
+    .logo-tricker-img {
+        @apply h-8 w-auto;
+    }
+
+    /* Head text */
+    .head-text {
+        @apply text-center w-[377px] mx-auto md:w-[540px] px-4;
+    }
+    .head-txt-top{
+        @apply text-black font-bold text-xs border inline-flex px-4 py-1 border-[#222222]/40 rounded-lg;
+    }
+    .head-txt-h2{
+        @apply text-black font-bold text-3xl md:text-5xl tracking-tighter mt-7 mb-6;
+    }
+    .head-txt-p{
+        @apply text-[#010D3E] text-lg tracking-wider leading-[30px];
+    }
+    /* showcase components */
+    .box{
+        @apply p-3 shadow-lg rounded-lg ;
+    }
+    .box-h2{
+        @apply text-2xl font-bold mt-2 mb-1.5;
+    }
+    .box-p{
+        @apply text-xl mb-1.5;
+    }
+    .box-btn{
+        @apply flex items-center gap-1 text-xl;
+    }
+    /* management */
+    .cube-hexile{
+        @apply w-[408px] h-[538px] md:w-[486px] ;
+    }
+    .card{
+        @apply w-full max-w-xs p-10 border border-[#f1f1f1] rounded-3xl  shadow-[0_7px_14px_#EAEAEA]; 
+    }
+
+}
+
+/* Custom scrollbar */
+* {
+    scrollbar-width: thin;
+    text-transform: capitalize;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+.popular-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    will-change: background-position;
+  }
+  
