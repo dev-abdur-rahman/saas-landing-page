@@ -56,6 +56,7 @@ const Management = () => {
                                 alt="cube hexil1"
                                 className='object-cover'
                                 ref={cubeHexil2i}
+                                loading="lazy"
                             />
                         </div>
                         <div className='py-4 w-[329px]'>

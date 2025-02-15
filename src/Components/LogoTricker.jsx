@@ -32,7 +32,7 @@ const LogoTricker = () => {
               ref={logoTricker}
             >
               {logos.concat(logos).map((logo, index) => (
-                <img key={index} src={logo} alt="logo" className='logo-tricker-img' />
+                <img key={index} loading="lazy" src={logo} alt="logo" className='logo-tricker-img' />
               ))}
               
             </div>

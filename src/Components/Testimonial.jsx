@@ -95,7 +95,7 @@ const TestimonialColumn = ({ testimonials, className, duration = 5 }) => {
           <div key={username} className="card">
             <div>{text}</div>
             <div className="flex items-center mt-4 gap-1.5">
-              <img src={imageSrc} alt={name} width={40} height={40} className="rounded-full h-10 w-10" />
+              <img src={imageSrc} loading="lazy" alt={name} width={40} height={40} className="rounded-full h-10 w-10" />
               <div>
                 <div className="tracking-tight leading-5 font-bold">{name}</div>
                 <div className="tracking-tight leading-5">{username}</div>

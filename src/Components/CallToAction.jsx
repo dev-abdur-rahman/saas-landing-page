@@ -57,6 +57,7 @@ const CallToAction = () => {
                   src={star} 
                   alt="star image" 
                   width={363} height={363}
+                  loading="lazy"
                   className='absolute lg:top-100 lg:-left-0 hidden md:block md:-top-20 md:-left-60'
                 />
               </div>
@@ -66,6 +67,7 @@ const CallToAction = () => {
                   src={spring} 
                   alt="spring image" 
                   width={363} height={363}
+                  loading="lazy"
                   className='absolute lg:top-100 lg:-right-0 hidden md:block md:-top-20 md:-right-50'
                 />
               </div>

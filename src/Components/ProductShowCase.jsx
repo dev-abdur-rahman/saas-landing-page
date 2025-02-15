@@ -56,18 +56,21 @@ const ProductShowCase = () => {
                     src={productImage} 
                     alt="product  image" 
                     className='mt-10'
+                    loading="lazy"
                 />
                 <img 
                     src={pyramidImage} 
                     ref={pyramidRef}
                     alt="pyramid images"
                     height={262} width={262}
+                    loading="lazy"
                     className='absolute -right-36 top-40 hidden md:block' 
                 />
                 <img 
                     ref={tubeRef}
                     src={tubeImage} 
                     alt="tube images"
+                    loading="lazy"
                     className='absolute -bottom-50 -left-36 hidden lg:block' 
                     height={248} width={248}
 
