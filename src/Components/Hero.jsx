@@ -1,88 +1,109 @@
-import React, { useEffect, useRef, useState } from "react";
-import Logo from "../assets/images/logosaas.png";
-import { FiMenu, FiX } from "react-icons/fi";
-import { useWindowScroll } from "react-use";
+import React from "react";
+import { FaArrowRight } from "react-icons/fa";
+import cogImage from "../assets/images/cog.png";
+import cylinder from "../assets/images/cylinder.png";
+import noodle from "../assets/images/noodle.png";
 
-const Navbar = () => {
-  const { y: currentScrollY } = useWindowScroll();
-  const [isNavVisible, setIsNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  useEffect(() => {
-    if (currentScrollY === 0) {
-      setIsNavVisible(true);
-    } else if (currentScrollY > lastScrollY) {
-      setIsNavVisible(false);
-    } else if (currentScrollY < lastScrollY && currentScrollY > 50) {
-      setIsNavVisible(true);
-    }
-    setLastScrollY(currentScrollY);
-  }, [currentScrollY, lastScrollY]);
+gsap.registerPlugin(ScrollTrigger);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
+const Hero = () => {
+  const cogRef = React.useRef(null);
+  const sectionRef = React.useRef(null);
+  const cylinderRef = React.useRef(null);
+  const noodleRef = React.useRef(null);
+
+  useGSAP(() => {
+    gsap.to(cogRef.current, {
+        y: 30,
+        duration: 3,
+        ease: "power1.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+    gsap.to(noodleRef.current, {
+      y: (i, target) => -target.offsetHeight * 2,
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top center", 
+        end: "bottom top",
+        scrub: 1,
       }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+    });
+    gsap.to(cylinderRef.current, {
+      y: (i, target) => -target.offsetHeight * 2,
+      ease: "none",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top center", 
+        end: "bottom top",
+        scrub: 1,
+      }
+    });
+  })
 
   return (
-    <div
-      className={`fixed w-full mt-1.5 z-50 backdrop-blur-sm transition-all duration-300 ${
-        currentScrollY === 0 ? "top-auto" : isNavVisible ? "top-0" : "-top-20"
-      }`}
+    <section
+      ref={sectionRef}
+      className="relative lg:py-16 py-14 pb-20 md:pb-0 md:pt-0 bg-[radial-gradient(ellipse_100%_100%_at_bottom_left,#183EC2,#EAEEFE_100%)] overflow-x-clip"
     >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-3">
-          <a href="#">
-            <img src={Logo} alt="saas logo" height={40} width={40} />
-          </a>
-          <button
-            className="text-2xl md:hidden"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <FiX /> : <FiMenu />}
-          </button>
-          <nav className="hidden md:flex gap-6 capitalize text-black/60 items-center">
-            <a href="#">home</a>
-            <a href="#">about</a>
-            <a href="#features">features</a>
-            <a href="#">customers</a>
-            <a href="#">update</a>
-            <a href="#">help</a>
-            <button className="btn">get it for free</button>
-          </nav>
+        <div className="md:flex items-center justify-between">
+          <div className="md:w-[478px] lg:w-[550px]">
+            <div className="text-sm font-bold border border-[#222]/40 inline-flex py-1 px-2 rounded-lg">
+              version 2.0 is here
+            </div>
+            <h1 className="mt-6 text-5xl md:text-7xl tracking-tighter font-bold">
+              Pathway to{" "}
+              <span className="bg-gradient-to-b from-black to-[#001e80] text-transparent bg-clip-text">
+                productivity
+              </span>
+            </h1>
+            <p className="text-xl tracking-tight text-[#010D3E] mt-6">
+              Celebrate the joy of accomplishment with an app designed to track
+              your progress, motivate your efforts, and celebrate your
+              successes.
+            </p>
+            <div className="flex gap-4 mt-7">
+              <button className="btn">get it for free</button>
+              <button className="flex items-center gap-1 font-bold bg-transparent">
+                learn more <FaArrowRight className="w-4 h-4 text-black" />
+              </button>
+            </div>
+          </div>
+          <div className="mt-20 md:mt-0 md:h-[648px] md:flex-1 relative lg:h-[460px]">
+            <img
+              ref={cogRef}
+              src={cogImage}
+              alt="cog images"
+              className="md:absolute md:h-full md:w-auto md:max-w-none md:-right-[350px] lg:right-10"
+            />
+            <img
+              ref={cylinderRef}
+              src={cylinder}
+              alt="cylinder image"
+              width={220}
+              height={220}
+              className="hidden md:block top-20 -left-32 md:absolute lg:left-8 lg:top-30"
+            />
+            <img
+            ref={noodleRef}
+              src={noodle}
+              alt="noodle img"
+              width={220}
+              height={220}
+              className="hidden lg:block absolute -bottom-100 -right-10 rotate-20"
+            />
+          </div>
         </div>
       </div>
-
-      <div
-        ref={menuRef}
-        className={`absolute top-0 left-0 w-full p-5 transform transition-transform duration-300 ${
-          menuOpen ? "translate-y-0" : "-translate-y-full"
-        } md:hidden shadow-md 
-      `}
-      >
-        <nav className="flex flex-col gap-4 text-white text-lg">
-          <a href="#" onClick={() => setMenuOpen(false)}>home</a>
-          <a href="#" onClick={() => setMenuOpen(false)}>about</a>
-          <a href="#features" onClick={() => setMenuOpen(false)}>features</a>
-          <a href="#" onClick={() => setMenuOpen(false)}>customers</a>
-          <a href="#" onClick={() => setMenuOpen(false)}>update</a>
-          <a href="#" onClick={() => setMenuOpen(false)}>help</a>
-          <button className="btn w-full bg-white text-black" onClick={() => setMenuOpen(false)}>
-            get it for free
-          </button>
-        </nav>
-      </div>
-    </div>
+    </section>
   );
 };
 
-export default Navbar;
+export default Hero;
